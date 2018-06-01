@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>URL Shortener</title>
+</head>
+<body>
+	<h1>URL Shortener</h1>
+	<form class='shortener' method='POST' action='shorten.php'>
+		<input type='text' name='long_url' placeholder='Paste URL to shorten'>
+		<input type='submit' value='Get short URL!'>
+	</form>
+	<div class='shortened'></div>
+</body>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script>
+$(document).ready(function() {
+	$('.shortener').submit(function(evt){
+		evt.preventDefault();
+		let post_url = $(this).attr('action'); //get form action url
+		let form_data = $(this).serialize(); //Encode form elements for submission
+		
+		$.post(post_url, form_data, function(response) {
+		  $('.shortened').html(response);
+		});
+	});
+});
+</script>
+</html>
